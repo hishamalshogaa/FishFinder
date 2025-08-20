@@ -20,7 +20,7 @@ jobs:
       - run: npm install
 
       - name: Login to Expo
-        run: eas login --token ${{ y7ru6kvdyOZ5mmB1xqQJg6zD749fmAKfnyo77_yp }}
+        run: eas login --token ${{ Token }}
 
       - name: Build Android APK
         run: eas build -p android --profile preview --non-interactive
