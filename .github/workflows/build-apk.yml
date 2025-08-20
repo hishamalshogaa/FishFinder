@@ -16,14 +16,14 @@ jobs:
           node-version: 18
 
       - run: npm install -g expo eas-cli
-
       - run: npm install
-
-      - name: Expo Login
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android (APK)
         run: eas build -p android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Show build info
         run: eas build:list --limit 1 --json
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
