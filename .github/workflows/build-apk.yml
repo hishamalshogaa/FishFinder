@@ -1,37 +1,33 @@
-name: Build Expo APK
+name: build-android
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  build-android:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: |
-          npm install -g eas-cli
-          npm install
+      - run: npm install -g expo eas-cli
+
+      - run: npm install
 
       - name: Login to Expo
         run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
-        run: eas build -p android --profile preview --non-interactive --wait
+        run: eas build -p android --profile preview --non-interactive
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          name: RedSeaFishFinder-APK
-          path: dist/**
+          name: android-build
+          path: dist/
           
