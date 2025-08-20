@@ -1,0 +1,17 @@
+{
+  "cli": {
+    "version": ">= 3.13.2"
+  },
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "release": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  }
+}
